@@ -11,8 +11,6 @@ import Emptyaddress from "@/images/empty-address-list.webp";
 import { AdvancedMarker, APIProvider, Map, MapCameraChangedEvent, MapEvent, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY as string
-
 export default function DeliveryBar() {
 	const t = useTranslations('Deliverybar')
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -88,7 +86,7 @@ function SelectAddress() {
 
 					</ModalHeader>
 					<ModalBody>
-						<APIProvider apiKey={GOOGLE_MAPS_API_KEY} onLoad={() => console.log('Maps API has loaded.')}>
+						<APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string} onLoad={() => console.log('Maps API has loaded.')}>
 							<CustomMap />
 						</APIProvider>
 					</ModalBody>
@@ -173,7 +171,8 @@ function CustomMap() {
 							</div>
 						</div>
 						<Button radius="full" className="w-full bg-red-600 text-[1rem] text-white font-semibold" onPress={() => {
-							setSaveAddress(`${addressHeader} ${address}`)
+							setSaveAddress(`${addressHeader} ${address}`);
+							console.log(saveAddress);
 						}}>Choose this location</Button>
 					</div >
 					: <></>
