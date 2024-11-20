@@ -1,0 +1,27 @@
+{
+    "Metadata": {
+        "title": "สเวนเซ่นส์ โคลน",
+        "description": "Codeiva เทสต์ สเวนเซ่นส์ โคลน"
+    },
+    "Home": {
+        "welcome": "ยินดีต้อนรับ สู่ แอพ ของฉัน"
+    },
+    "Topbar": {
+        "loginbutton": "เข้าสู่ระบบ / ลงทะเบียน"
+    },
+    "Deliverybar": {
+        "Selectaddress": "เลือกที่อยู่สำหรับจัดส่ง",
+        "deliveryto": "ไปส่งที่:",
+        "Selectdeliveryaddress": "เลือกที่อยู่สำหรับจัดส่ง",
+        "Saveaddress": "ที่อยู่ที่บันทึกไว้",
+        "Choosefrommap": "เลือกจากแผนที่",
+        "Nosaveaddress": "ไม่มีที่อยู่ที่บันทึกไว้",
+        "SelectAddressHeader" : "ที่อยู่สำหรับจัดส่ง"
+    },
+    "Hightlight": {
+        "Header" : "โปรโมชัน"
+    },
+    "Deliverymenu":{
+        "Header": "เมนูจัดส่ง"
+    }
+}

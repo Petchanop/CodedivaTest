@@ -1,0 +1,27 @@
+{
+    "Metadata": {
+        "title": "Swensen's Clone",
+        "description": "Codediva test swensen's clone"
+    },
+    "Home": {
+        "welcome": "welcome to my app"
+    },
+    "Topbar":{
+        "loginbutton": "Login / Register"
+    },
+    "Deliverybar": {
+        "Selectaddress": "Select a delivery address",
+        "deliveryto": "Delivery To:",
+        "Selectdeliveryaddress": "Select delivery address",
+        "Saveaddress": "Saved Address",
+        "Choosefrommap": "Choose from map",
+        "Nosaveaddress": "No save adress",
+        "SelectAddressHeader" : "Delivery Address"
+    },
+    "Hightlight": {
+        "Header" : "Highlight & Promotions"
+    },
+    "Deliverymenu":{
+        "Header": "Delivery Menu"
+    }
+}
