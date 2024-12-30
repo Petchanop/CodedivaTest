@@ -8,7 +8,7 @@ import ChevronLeftIcon from "@/images/icons/chevron_left.svg";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { createElement, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { routing } from '@/i18n/routing';
+// import { routig } from '@/i18n/routing';
 import { Input } from "@nextui-org/input";
 import { Eye, EyeOff } from "lucide-react";
 import { CalendarDate } from "@internationalized/date";
