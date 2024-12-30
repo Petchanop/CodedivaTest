@@ -23,6 +23,7 @@ export default async function Home() {
     <>
       <div className="container flex flex-col pt-12 pl-6 m-auto max-md:justify-start max-w-[1200px] overflow-x-hidden overflow-y-hidden">
         <div className="pb-6">
+          <h1>test github ruleset</h1>
           <DeliveryBar />
         </div>
         <div className="flex flex-col gap-2">
