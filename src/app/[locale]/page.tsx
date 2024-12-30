@@ -4,6 +4,7 @@ import Hightlight from "@/components/highlight/highlight";
 import HighlightOftheDay from '@/images/banner_sw-banner.webp'
 import { HightlightCarousel } from '@/components/highlight/carousel';
 import HightlightWed from "@/images/hightlight/banner_sw-banner_wed.webp"
+import Sidebar from "@/components/sidebar/mycart";
 // import { getTranslations } from "next-intl/server";
 const slides = [
   {
@@ -30,6 +31,7 @@ export default async function Home() {
           <Hightlight />
           <DeliveryMenu />
       </div>
+      <Sidebar />
     </>
   );
 }

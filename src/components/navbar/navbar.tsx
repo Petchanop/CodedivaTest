@@ -6,20 +6,23 @@ import Mobilecart from "@/images/mobile-cart.svg"
 import LanguageIcon from "@/images/change-language.svg"
 import Image from "next/image";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
-import Link from "next/link";
+import {Link} from '@/i18n/routing';
 import { Button } from "@nextui-org/button";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
-import { useState } from "react";
+import { createElement, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Noto_Sans_Thai } from 'next/font/google';
-import { Menu } from 'lucide-react';
+import { Eye, EyeOff, Menu } from 'lucide-react';
 import FacebookIcon from '@/images/social_media_icon/facebook-icon.svg';
 import InstagramIcon from '@/images/social_media_icon/instagram-icon.svg';
 import LineIcon from '@/images/social_media_icon/line-icon.svg';
 import TiktokIcon from '@/images/social_media_icon/tiktok-icon.svg';
 import AppleStoreIcon from '@/images/social_media_icon/app-store.webp';
 import GooglePlayIcon from '@/images/social_media_icon/google-play.webp';
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/modal";
+import { Input } from "@nextui-org/input";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const NotoFont = Noto_Sans_Thai
     ({
@@ -48,7 +51,6 @@ function LanguageSwitcher(props: { lang: string }) {
     const [Language, setLanguage] = useState<string>(lang);
     const router = useRouter();
     const pathname = usePathname();
-
     const baseSelectFontsize = "text-xl"
     const selectLanguageRender = `bg-red-200 ${baseSelectFontsize}`
 
@@ -147,7 +149,7 @@ export function Topbar(props: { lang: string }) {
                 <HamburgerMenu />
             </NavbarContent>
             <NavbarBrand className="pl-5 max-sm:justify-center">
-                <Link color="foreground" href="#">
+                <Link color="foreground" href="/">
                     <Image src={Swensenlogo}
                         width={142}
                         height={34}
@@ -168,9 +170,7 @@ export function Topbar(props: { lang: string }) {
                     />
                 </NavbarItem>
                 <NavbarItem className="max-lg:hidden">
-                    <Button radius="full" className="h-[2.9rem] bg-[#d1001f] text-[1.15rem] text-white font-weight-900 tracking-normal p-3">
-                        <p className={`${NotoFont.className} m-1`}>{buttonLabel}</p>
-                    </Button>
+                    <SignInModal buttonLabel={buttonLabel} />
                 </NavbarItem>
                 <NavbarItem className="max-lg:hidden gap-0">
                     <LanguageSwitcher lang={lang} />
@@ -183,10 +183,10 @@ export function Topbar(props: { lang: string }) {
 export function Bottombar() {
     return (
         <>
-            <div className="flex flex-col flex-wrap w-full mx-auto bg-transparent bg-gray-800
-            max-md:p-4 max-md:justify-start ">
-                <div className="xl:flex xl:flex-row flex-col flex-wrap justify-center gap-16 md:pt-8 text-[1.1rem] font-bold max-md:space-y-4">
-                    <div className="flex flex-shrink-0 md:justify-center">
+            <div className="flex flex-col flex-wrap w-full bg-transparent bg-gray-800
+            max-md:p-5 max-[650px]:justify-start ">
+                <div className="xl:flex xl:flex-row flex-col flex-wrap space-y-2 justify-center md:pt-8 text-[1.1rem] font-bold max-md:space-y-4">
+                    <div className="flex flex-shrink-0 sm:justify-center">
                         <Link color="foreground" href="#">
                             <Image src={SwensenButtomlogo}
                                 width={142}
@@ -197,7 +197,8 @@ export function Bottombar() {
                             />
                         </Link>
                     </div>
-                    <div className="flex flex-row flex-wrap gap-8 max-md:gap-6 max-md:text-[1rem] justify-center items-center text-center max-md:justify-start" >
+                    <div className="flex flex-row flex-wrap sm:px-8 xl:space-x-10 max-sm:gap-4 text-[1.125rem] justify-center items-center text-center leading-4
+                    max-sm:justify-start max-sm:text-[0.875rem]">
                         <div className="flex-shrink-0">
                             <Link href="#">
                                 About us
@@ -229,7 +230,7 @@ export function Bottombar() {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex flex-row flex-wrap gap-2 justify-center items-center max-md:justify-start">
+                    <div className="flex flex-row flex-wrap gap-2 justify-center items-center max-sm:justify-start">
                         <div className="flex-shrink-0">
                             <Link href="#">
                                 <Image
@@ -294,11 +295,127 @@ export function Bottombar() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-row text-lg mb-4 justify-center items-center max-xl:pt-4 max-md:justify-start">
+                <div className="flex flex-row text-lg mb-4 justify-center items-center max-xl:pt-4 max-sm:justify-start">
                     This site is use for Educational only.
                 </div>
             </div>
         </>
     );
+}
+
+function SignInModal(props: { buttonLabel: string }) {
+    const t = useTranslations("SignInModal");
+    const { buttonLabel } = props;
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    return (
+        <>
+            <Button radius="full" onPress={onOpen} className="h-[2.9rem] bg-[#d1001f] text-[1.15rem] text-white font-weight-900 tracking-normal p-3">
+                <p className={`${NotoFont.className} m-1`}>{buttonLabel}</p>
+            </Button>
+            <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                isDismissable={false} radius="sm"
+                className="w-[25.5rem] h-[32.5rem]"
+            >
+                <ModalContent>
+                    <ModalHeader className="flex flex-col px-8 pt-8 text-black text-[1.8rem] leading-9">
+                        {t('Header').split('\n').map((line) => {
+                            return <>
+                                <p>{line}</p>
+                            </>
+                        })}
+                    </ModalHeader>
+                    <ModalBody>
+                        <LoginForm
+                            Email={t('Email')}
+                            Password={t('Password')}
+                            ForgetPassword={t('ForgetPassword')}
+                            Signin={t('Signin')}
+                            Footer={t('Footer')}
+                            Signup={t('Signup')}
+                            onOpenChange={onOpenChange}
+                        />
+                    </ModalBody>
+                    <ModalFooter>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </>
+    )
+}
+
+type TLoginFormWord = {
+    Email: string;
+    Password: string;
+    ForgetPassword: string;
+    Signin: string;
+    Signup: string;
+    Footer: string;
+    onOpenChange: () => void;
+}
+
+type TLoginForm = {
+    email: string;
+    password: string;
+}
+
+import {routing} from '@/i18n/routing';
+function LoginForm(props: TLoginFormWord) {
+    const { Email, Password, ForgetPassword, Signin, Signup, Footer, onOpenChange } = props;
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const { register, handleSubmit } = useForm<TLoginForm>();
+
+    const onSubmit: SubmitHandler<TLoginForm> = (data: TLoginForm) => {
+        console.log("Form Data: ", data);
+        // Handle login logic here, e.g., API request
+    };
+    console.log(routing.locales);
+
+    return (
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col px-2 text-black space-y-8"
+        >
+            <div key={Email} className="flex-col space-y-2">
+                <p className="text-[0.9rem] font-semibold">{Email}  <span className="text-red-500">*</span></p>
+                <Input
+                    placeholder="Email"
+                    variant="bordered"
+                    size="lg" radius="sm"
+                    className="h-[2.2rem]"
+                    type="email"
+                    {...register('email', { required: true })}
+                />
+            </div>
+            <div key={Password} className="flex-col space-y-2">
+                <p className="text-[0.9rem] font-semibold">{Password}  <span className="text-red-500">*</span></p>
+                <Input
+                    placeholder="Password"
+                    variant="bordered"
+                    size="lg" radius="sm"
+                    type={showPassword ? "text" : "password"}
+                    className="h-[2.2rem]"
+                    {...register('password', { required: true })}
+                />
+                {createElement(showPassword ? Eye : EyeOff, {
+                    className: "absolute top-1/2 translate-y-8 right-12",
+                    onClick: () => setShowPassword(prev => !prev)
+                })}
+
+            </div>
+            <div key={Footer} className="flex-col space-y-4">
+                <Link href="#" className="font-semibold text-blue-500">
+                    {ForgetPassword}
+                </Link>
+                <Button type="submit" radius="full" className="w-full h-[3rem] font-semibold text-[1.2rem] text-gray-400 bg-gray-200">
+                    {Signin}
+                </Button>
+                <p className="text-center items-center">{Footer} <Link href="/register" onClick={() => onOpenChange()} className="font-semibold text-blue-500">{Signup}</Link></p>
+            </div>
+
+        </form>
+    )
 }
 

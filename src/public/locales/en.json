@@ -6,7 +6,7 @@
     "Home": {
         "welcome": "welcome to my app"
     },
-    "Topbar":{
+    "Topbar": {
         "loginbutton": "Login / Register"
     },
     "Deliverybar": {
@@ -16,12 +16,40 @@
         "Saveaddress": "Saved Address",
         "Choosefrommap": "Choose from map",
         "Nosaveaddress": "No save adress",
-        "SelectAddressHeader" : "Delivery Address"
+        "SelectAddressHeader": "Delivery Address"
     },
     "Hightlight": {
-        "Header" : "Highlight & Promotions"
+        "Header": "Highlight & Promotions"
     },
-    "Deliverymenu":{
+    "Deliverymenu": {
         "Header": "Delivery Menu"
+    },
+    "SignInModal": {
+        "Header": "Welcome!\nTo continue, please\nsign in.",
+        "Email": "Email",
+        "Password": "Password",
+        "ForgetPassword": "Forget Password?",
+        "Signin": "Login",
+        "Footer": "Don’t have an account?",
+        "Signup": "Sign up"
+    },
+    "RegisterPage": {
+        "Signin": "Already have an account?",
+        "SigninButton": "Sign in",
+        "Back": "Back",
+        "Header": "Sign Up for Exclusive Delivery\nDeals!",
+        "Firstname": "First name",
+        "Lastname": "Last name",
+        "Email": "Email",
+        "Password": "Password",
+        "DateOfBirth": "Date of birth",
+        "PhoneNumber": "Phone number",
+        "Gender": "Gender",
+        "Male": "Male",
+        "Female": "Female",
+        "NotSpecific" : "Not Specific",
+        "TermAndConditions" : "I have read and accepted the terms & conditions and privacy policy of Swensen’s.",
+        "ReceiveInformation": "I agree to receive the information including other marketing activities from Swensen’s and affiliated companies.\nWe will keep your data confidential. Learn more about privacy policy from company’s website.",
+        "CreateAccount": "Create Account"
     }
 }

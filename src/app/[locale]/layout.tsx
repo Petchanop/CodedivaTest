@@ -5,6 +5,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { routing } from "@/i18n/routing";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
+import { getServerSession } from "next-auth";
 
 type Props = {
   params: { locale: string }
@@ -32,11 +34,13 @@ export default async function LocaleLayout({
     notFound();
   }
   const messages = await getMessages({ locale: locale });
+  const session = await getServerSession()
   return (
     <>
       <html lang={locale}>
         <body>
           <NextUIProvider>
+          <SessionProvider session={session}>
             <NextIntlClientProvider messages={messages}>
               <SwensenNavbar lang={locale}>
                 <main className="light text-foreground bg-background">
@@ -44,6 +48,7 @@ export default async function LocaleLayout({
                 </main>
               </SwensenNavbar>
             </NextIntlClientProvider>
+            </SessionProvider>
           </NextUIProvider>
         </body>
       </html>
